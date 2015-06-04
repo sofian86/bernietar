@@ -43,7 +43,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # General Settings
-  config.app_domain = 'localhost'
+  config.app_domain = 'local.bernietar.com'
 
   # Email
   config.action_mailer.delivery_method = :smtp
@@ -56,6 +56,6 @@ Rails.application.configure do
       user_name: Rails.application.secrets.mandrill_user,
       password: Rails.application.secrets.mandrill_key,
       authentication: :plain,
-      domain: 'localhost'
+      domain: 'local.bernietar.com'
   }
 end
