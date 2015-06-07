@@ -58,6 +58,9 @@ group :development, :test do
 
   # Testing
   gem 'rspec-rails'
+
+  # Stub data
+  gem 'factory_girl_rails'
 end
 
 group :test do

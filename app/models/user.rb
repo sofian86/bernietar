@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_many :identities, dependent: :destroy
 
-  TEMP_EMAIL_PREFIX = 'change@me'
-  TEMP_EMAIL_REGEX = /\Achange@me/
+  TEMP_EMAIL_PREFIX = 'temporary@bernietar'
+  TEMP_EMAIL_REGEX = /\Atemporary@bernietar/
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
