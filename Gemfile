@@ -4,15 +4,14 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Database
+gem 'pg', '~> 0.18.2'
 
 # CSS
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'autoprefixer-rails'
-
 
 # Javascript
 gem 'coffee-rails', '~> 4.1.0'
@@ -21,6 +20,13 @@ gem 'turbolinks'
 
 # Font icons
 gem 'font-awesome-rails', '~> 4.3.0.0'
+
+# Authentication
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
 
 # App monitoring
 gem 'newrelic_rpm'
@@ -52,6 +58,9 @@ group :development, :test do
 
   # Testing
   gem 'rspec-rails'
+
+  # Stub data
+  gem 'factory_girl_rails'
 end
 
 group :test do
