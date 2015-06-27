@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Bernietar - Support Bernie Sanders on Social Media</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= favicon_link_tag 'favicon.ico' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<%= render "layouts/head" %>
 
 <div class="container">
-  <div class="notice"><%= notice %></div>
-  <div class="alert"><%= alert %></div>
+  <%= render "shared/flash" %>
   <%= yield %>
 </div>
 
-
-</body>
-</html>
+<%= render "layouts/footer" %>
