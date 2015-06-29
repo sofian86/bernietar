@@ -1,0 +1,92 @@
+body, html {
+  overflow-x: hidden;
+}
+
+.hero {
+  height:283px;
+  position: relative;
+
+  h1 {
+    font-weight:700;
+    font-size:55px;
+
+    @include sm-screen {
+      font-size:70px;
+    }
+  }
+
+  h3 {
+    font-size:16px;
+
+    @include sm-screen {
+      font-size:18px;
+    }
+  }
+
+  .bernietar {
+    width:300px;
+    position: absolute;
+    bottom:-36px;
+    left:0;
+    right:0;
+    margin:0 auto;
+
+    @include sm-screen {
+      width:350px;
+      bottom:-56px;
+    }
+  }
+}
+
+// A full-width band for placing content in. Colors can be chosen with
+// .band-color
+.band {
+  position: relative;
+  padding:20px 0;
+  width:100%;
+
+  &:before {
+    content:'';
+    width:9000px;
+    margin-left:-4500px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    z-index: -1;
+  }
+
+  &.band-white {
+    color:$gray;
+    &:before { background: #fff; }
+  }
+
+  &.band-primary {
+    color:#fff;
+    &:before { background: $brand-primary; }
+  }
+
+  &.band-gray {
+    color:$gray;
+    &:before { background: $brand-gray; }
+  }
+}
+
+
+.helpful-links {
+  list-style-type: none;
+  text-align: center;
+  padding:0;
+
+  li {
+    display: inline-block;
+    margin-right:30px;
+
+    &:last-child {
+      margin-right:0;
+    }
+  }
+}
+
+.home-explanation {
+  margin-top:40px;
+}

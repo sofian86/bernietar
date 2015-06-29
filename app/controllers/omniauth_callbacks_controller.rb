@@ -23,8 +23,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     super resource
 
     if resource.email_verified?
-      super resource
+      # super resource
+      # redirect to something like /explanation/facebook
+      @network = params[:action]
+      explanation_path(@network)
     else
+      # just Twitter for now
       finish_signup_path(resource)
     end
   end

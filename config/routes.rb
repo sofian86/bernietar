@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # User page
   resources :users, only: [:show]
 
-  get 'social#explanation'
+  # :network identifies Twittter, Facebook, etc.
+  get '/explanation/:network', to: 'social#explanation', as: :explanation
 
 end

@@ -22,6 +22,7 @@ $brand-warning:         #f0ad4e !default;
 $brand-danger:          #F55B5B !default;
 
 $brand-red:             #F55B5B !default;
+$brand-gray:            #EFF3F7 !default;
 
 
 //== Scaffolding
@@ -29,9 +30,9 @@ $brand-red:             #F55B5B !default;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               $brand-primary !default;
+$body-bg:               #fff !default;
 //** Global text color on `<body>`.
-$text-color:            #fff !default;
+$text-color:            $gray !default;
 
 //** Global textual link color.
 $link-color:            $gray-darker !default;

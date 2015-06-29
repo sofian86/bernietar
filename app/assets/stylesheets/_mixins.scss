@@ -1,0 +1,11 @@
+@mixin xs-screen        { @media (max-width: 360px) { @content; } }
+@mixin xs-screen-plus-1 { @media (max-width: 360px+1) { @content; } }
+
+@mixin sm-screen        { @media (min-width: $screen-sm-min) { @content; } }
+@mixin sm-screen-plus-1 { @media (min-width: $screen-sm-min+1) { @content; } }
+
+@mixin md-screen        { @media (min-width: $screen-md-min) { @content; } }
+@mixin md-screen-plus-1 { @media (min-width: $screen-md-min+1) { @content; } }
+
+@mixin lg-screen        { @media (min-width: $screen-lg-min) { @content; } }
+@mixin lg-screen-plus-1 { @media (min-width: $screen-lg-min+1) { @content; } }
