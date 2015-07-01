@@ -6,3 +6,19 @@
     font-weight:700;
   }
 }
+
+.text-sans {
+  font-family: $font-family-sans-serif;
+}
+
+.light {
+  font-family: $font-family-sans-serif;
+  color:$brand-red;
+  font-weight:300;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-size:14px;
+  text-align: left;
+  margin-bottom:3px;
+}

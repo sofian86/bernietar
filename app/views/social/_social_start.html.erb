@@ -1,0 +1,18 @@
+<div class="social-bucket">
+  <div class="media media-social">
+	<div class="media-left">
+	  <a href="#">
+		<%= image_tag "icon-#{network.downcase}.png", alt: network.capitalize, class:'social-icon' %>
+	  </a>
+	</div>
+	<div class="media-body">
+	  <h3 class="text-primary media-heading">
+		<span class="light">Update</span> <%= network %>
+	  </h3>
+	</div>
+  </div>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non nulla et mi pellentesque tincidunt sed sodales tellus. In auctor varius tempus. Fusce feugiat urna tellus.</p>
+
+  <%= link_to 'Start', user_omniauth_authorize_path(provider_corrector(network)), class:'btn btn-lg btn-danger' %>
+</div>
