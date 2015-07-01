@@ -93,6 +93,7 @@ body, html {
 
 .home-explanation {
   margin-top:70px;
+  margin-bottom:50px;
 }
 
 // Used on homepage
@@ -115,5 +116,23 @@ body, html {
 
   @include sm-screen {
     margin-bottom:20px;
+  }
+}
+
+.site-footer {
+  background: $brand-red;
+  border-radius: 5px;
+  color:#fff;
+  padding:30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  margin-top:-50px;
+
+  a {
+    color:#fff;
+
+    &:hover {
+      text-decoration: none;
+      opacity:0.8;
+    }
   }
 }
