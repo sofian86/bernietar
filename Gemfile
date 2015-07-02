@@ -28,6 +28,9 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
+# Social APIs
+gem 'twitter'
+
 # App monitoring
 gem 'newrelic_rpm'
 

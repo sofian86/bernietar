@@ -53,6 +53,11 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def update_twitter
+    current_user.update_twitter
+  end
+
   private
 
   def set_user

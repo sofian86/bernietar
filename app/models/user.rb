@@ -56,4 +56,16 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+
+  # Update the user's Twitter avatar and header image
+  def update_twitter
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = Rails.application.secrets.twitter_consumer_key
+      config.consumer_secret     = Rails.application.secrets.twitter_consumer_secret
+      config.access_token        = ""
+      config.access_token_secret = ""
+    end
+
+    client.update("hi")
+  end
 end
