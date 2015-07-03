@@ -35,7 +35,8 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         # @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to explanation_path(), notice: 'Your profile was successfully updated.'
+        # Need to know the network right here to pass to explanation_path
+        redirect_to explanation_path(:twitter), notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
       end

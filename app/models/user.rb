@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
       email = auth.info.email if email_is_verified
       user = User.where(:email => email).first if email
 
+      # Set the user's oauth token and secret (if available)
+
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
@@ -48,6 +50,12 @@ class User < ActiveRecord::Base
     # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
+
+      # Add the token and secret if nil
+      # Twitter first. Might need a few conditions for the various networks
+      identity.token  = auth.credentials.token if !auth.credentials.token.nil?
+      identity.secret = auth.credentials.secret if !auth.credentials.secret.nil?
+
       identity.save!
     end
     user
