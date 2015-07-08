@@ -22,3 +22,20 @@
   text-align: left;
   margin-bottom:3px;
 }
+
+.band-primary {
+
+  h3.subhead {
+    color:$gray-lighter;
+    font-size:18px;
+    font-weight:300;
+  }
+}
+
+.text-gray-lighter {
+  color:$gray-lighter;
+
+  &:hover {
+    color: #fff;
+  }
+}

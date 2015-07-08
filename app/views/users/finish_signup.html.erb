@@ -1,27 +1,34 @@
 <div class="band band-primary">
-  <div id="add-email" class="hero">
+  <div id="add-email" >
     <h1 class="text-center">Can we get your email?</h1>
-    <h3 class="text-center text-sans">Your email will help us link your social accounts together on Bernietar.</h3>
-    <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
-      <% if @show_errors && current_user.errors.any? %>
-        <div id="error_explanation">
-          <% current_user.errors.full_messages.each do |msg| %>
-            <%= msg %><br>
-          <% end %>
-        </div>
-      <% end %>
-      <div class="form-group">
-        <%= f.label :email %>
-        <div class="controls">
-          <%= f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com' %>
-          <p class="help-block">Please confirm your email address. No spam.</p>
-        </div>
-      </div>
-      <div class="actions">
-        <%= f.submit 'Continue', :class => 'btn btn-primary' %>
-      </div>
-    <% end %>
+    <h3 class="text-center text-sans subhead">No spam. We'll only email you if the campaign dictates a need to change avatars.</h3>
+  </div>
+  <div class="row">
+	<div class="col-sm-6 col-sm-offset-3 add-email-container">
+	  <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
+		  <% if @show_errors && current_user.errors.any? %>
+			  <div id="error_explanation">
+				<% current_user.errors.full_messages.each do |msg| %>
+					<%= msg %><br>
+				<% end %>
+			  </div>
+		  <% end %>
+		  <div class="form-group">
+			<div class="controls">
+			  <%= f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com' %>
+			</div>
+		  </div>
+		  <div class="actions text-center">
+			<%= f.submit 'Continue', :class => 'btn btn-lg btn-primary btn-success', id: 'continue' %>
+			<br>
+			<br>
+			<%= link_to 'No thanks, I just want to update this one time', explanation_path(:twitter), class:'text-gray-lighter' %>
+		  </div>
+	  <% end %>
+	</div>
   </div>
 </div>
 
+<div class="band band-gray">
 
+</div>
