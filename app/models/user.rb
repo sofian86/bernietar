@@ -65,15 +65,21 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
-  # Update the user's Twitter avatar and header image
-  def update_twitter
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = Rails.application.secrets.twitter_consumer_key
-      config.consumer_secret     = Rails.application.secrets.twitter_consumer_secret
-      config.access_token        = ""
-      config.access_token_secret = ""
-    end
+  # Create a client so we can tweet, update images, etc.
+  def establish_twitter_client
+    # Get the oauth info
+    user_token = identities.where(provider:'twitter').pluck(:token).join(" ")
+    user_secret = identities.where(provider:'twitter').pluck(:secret).join(" ")
 
-    client.update("hi")
+    # Setup the client (assuming we have the token and secret)
+    unless user_token.nil? && user_secret.nil?
+      # Establish a Twitter client connection
+      client = Twitter::REST::Client.new do |config|
+          config.consumer_key         = Rails.application.secrets.twitter_consumer_key
+          config.consumer_secret      = Rails.application.secrets.twitter_consumer_secret
+          config.access_token         = user_token
+          config.access_token_secret  = user_secret
+      end
+    end
   end
 end

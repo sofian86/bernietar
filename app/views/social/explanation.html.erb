@@ -6,7 +6,13 @@
 </div>
 
 <div class="band band-gray">
-  <p>[Insert graphic]</p>
+  <div class="row">
+    <div class="col-sm-5">
+      <%= image_tag @current_avatar, class:'avatar center-block' %>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5"></div>
+  </div>
 
   <div class="text-center">
 	<%= link_to 'Okay, do it!', update_twitter_path(current_user), class: 'btn btn-lg btn-success' %>

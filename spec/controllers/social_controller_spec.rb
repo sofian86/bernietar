@@ -2,21 +2,23 @@ require 'rails_helper'
 
 describe SocialController do
 
-  let (:user) { create(:user) }
-  let (:identity) { create(:identity, user_id: user) }
+  let (:identity) { create(:identity) }
 
   before(:each) do
-    sign_in user
+    OmniAuth.config.mock_auth[:twitter] = nil # reset
+    sign_in identity.user
+    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise
+    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
   end
 
   describe "GET #explanation" do
     it "assigns network to @network" do
-      get :explanation, id: user, network: identity.provider
+      get :explanation, id: identity.user, network: identity.provider
       expect(assigns(:network)).to eq(identity.provider)
     end
 
     it "renders the :explanation template" do
-      get :explanation, id: user, network: identity.provider
+      get :explanation, id: identity.user, network: identity.provider
       expect(response).to render_template :explanation
       expect(response.status).to eq(200)
     end

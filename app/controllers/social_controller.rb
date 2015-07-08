@@ -6,17 +6,9 @@ class SocialController < ApplicationController
 
     case @network
       when "twitter"
-        user_token = current_user.identities.where(provider:@network).pluck(:token).join(" ")
-        user_secret = current_user.identities.where(provider:@network).pluck(:secret).join(" ")
-
-        client = Twitter::REST::Client.new do |config|
-          config.consumer_key        = Rails.application.secrets.twitter_consumer_key
-          config.consumer_secret     = Rails.application.secrets.twitter_consumer_secret
-          config.access_token        = user_token
-          config.access_token_secret = user_secret
-        end
-
-        # client.update("blarg")
+        byebug
+        puts @twitter_client.profile
+        @current_avatar = @twitter_client.user.profile_image_uri(size = :original)
     end
 
 
