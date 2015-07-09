@@ -63,6 +63,9 @@ group :development, :test do
   gem 'rspec-rails'
 
   # Stub data
+  gem 'webmock'
+
+  # Build data
   gem 'factory_girl_rails'
 end
 

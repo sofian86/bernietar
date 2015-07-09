@@ -5,10 +5,7 @@ describe SocialController do
   let (:identity) { create(:identity) }
 
   before(:each) do
-    OmniAuth.config.mock_auth[:twitter] = nil # reset
     sign_in identity.user
-    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise
-    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
   end
 
   describe "GET #explanation" do
@@ -25,7 +22,7 @@ describe SocialController do
 
     context "gets accessed by a non-user" do
       it "should deny access" do
-        sign_out user
+        sign_out identity.user
         get :explanation, network:identity.provider
         expect(response).to redirect_to user_session_path
       end
