@@ -30,7 +30,9 @@ describe SocialController do
   end
 
   describe "#POST #update_twitter" do
-
+    it "makes an API call to Twitter and updates the avatar" do
+      expect(response.status).to eq(200)
+    end
   end
 
 end

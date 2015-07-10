@@ -55,7 +55,11 @@ class UsersController < ApplicationController
 
 
   def update_twitter
-    current_user.update_twitter
+    if current_user.update_provider_avatar('twitter')
+      redirect_to root_path
+    else
+      raise "Didn't work"
+    end
   end
 
   private

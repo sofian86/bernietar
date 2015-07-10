@@ -6,7 +6,7 @@ class SocialController < ApplicationController
 
     case @network
       when "twitter"
-        @current_avatar = @twitter_client.user.profile_image_uri(size = :original)
+        @current_avatar = current_user.current_provider_avatar('twitter')
     end
   end
 end

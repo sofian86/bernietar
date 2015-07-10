@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   get '/explanation/:network', to: 'social#explanation', as: :explanation
 
   # Update Twitter provile images
-  match '/users/:id/update/twitter' , to: 'users#update_twitter', via: [:get], as: :update_twitter
+  match '/users/:id/update/twitter' , to: 'users#update_twitter', via: [:post], as: :update_twitter
 
 end

@@ -8,9 +8,8 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Try and set the twitter client if they're logged in
   def set_twitter_client
-    if user_signed_in? && @twitter_client.nil?
-      @twitter_client = current_user.establish_twitter_client
-    end
+    current_user.establish_twitter_client if user_signed_in?
   end
 end
