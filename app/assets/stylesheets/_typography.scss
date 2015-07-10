@@ -39,3 +39,11 @@
     color: #fff;
   }
 }
+
+.explain-the-update {
+  margin-bottom:30px;
+
+  @include sm-screen {
+    font-size:18px;
+  }
+}

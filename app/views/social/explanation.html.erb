@@ -6,13 +6,27 @@
 </div>
 
 <div class="band band-gray">
+
   <div class="row">
-    <div class="col-sm-5">
-      <%= image_tag @current_avatar, class:'avatar center-block' %>
-    </div>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-5"></div>
+	<div class="col-xs-12">
+	  <h5 class="text-sans text-center explain-the-update">We'll update your current avatar to the Bernietar so you can show your support every time you [need_helper]</h5>
+	</div>
   </div>
+
+  <div class="table-container avatar-update-example">
+	<div class="row table-row">
+	  <div class="col-xs-5 table-col">
+		<%= image_tag @current_avatar, class:'avatar center-block img-responsive' %>
+	  </div>
+	  <div class="col-xs-2 table-col vmiddle text-center">
+		<i class="fa fa-arrow-right"></i>
+	  </div>
+	  <div class="col-xs-5 table-col">
+		<%= image_tag @current_avatar, class:'avatar center-block img-responsive' %>
+	  </div>
+	</div>
+  </div>
+
 
   <div class="text-center">
 	<%= link_to 'Okay, do it!', update_twitter_path(current_user), class: 'btn btn-lg btn-success' %>

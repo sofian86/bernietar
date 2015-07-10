@@ -149,3 +149,26 @@ body, html {
 .avatar {
   border-radius:10px;
 }
+
+.table-container {
+  display: table;
+
+  .table-row {
+    height: 100%;
+    display: table-row;
+
+    .table-col {
+      display: table-cell;
+      float: none;
+      vertical-align: top;
+    }
+  }
+}
+
+.vmiddle {
+  vertical-align: middle !important;
+}
+
+.avatar-update-example {
+  margin-bottom:45px;
+}

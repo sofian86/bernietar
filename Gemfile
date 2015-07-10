@@ -62,9 +62,6 @@ group :development, :test do
   # Testing
   gem 'rspec-rails'
 
-  # Stub data
-  gem 'webmock'
-
   # Build data
   gem 'factory_girl_rails'
 end
@@ -74,5 +71,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'capybara-webkit', '~> 1.5.1'
+  # Stub data
+  gem 'webmock'
 end
 
