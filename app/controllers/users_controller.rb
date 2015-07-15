@@ -27,8 +27,6 @@ class UsersController < ApplicationController
   end
 
 
-  # This is just for Twitter at the moment. Occurs after they offer
-  # their email
   def finish_signup
     # authorize! :update, @user
     if request.patch? && params[:user] #&& params[:user][:email]
@@ -56,9 +54,9 @@ class UsersController < ApplicationController
 
   def update_twitter
     if current_user.update_provider_avatar('twitter')
-      redirect_to root_path
+      redirect_to social_done_path( current_user, 'twitter' )
     else
-      raise "Didn't work"
+      # Didn't work
     end
   end
 

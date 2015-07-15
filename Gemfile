@@ -61,6 +61,7 @@ group :development, :test do
 
   # Testing
   gem 'rspec-rails'
+  gem 'faker', '~> 1.4.3'
 
   # Build data
   gem 'factory_girl_rails'
@@ -71,6 +72,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'capybara-webkit', '~> 1.5.1'
+
   # Stub data
   gem 'webmock'
 end

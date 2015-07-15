@@ -9,4 +9,7 @@ class SocialController < ApplicationController
         @current_avatar = current_user.current_provider_avatar('twitter')
     end
   end
+
+  def all_done
+  end
 end

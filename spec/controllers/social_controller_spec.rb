@@ -3,6 +3,7 @@ require 'rails_helper'
 describe SocialController do
 
   let (:identity) { create(:identity) }
+  let (:twitter) { create(:identity, :twitter) }
 
   before(:each) do
     sign_in identity.user
@@ -29,9 +30,11 @@ describe SocialController do
     end
   end
 
-  describe "#POST #update_twitter" do
-    it "makes an API call to Twitter and updates the avatar" do
-      expect(response.status).to eq(200)
+  describe "GET #all_done" do
+    it "renders the :all_done template" do
+      get :all_done, id: twitter.user, network: 'twitter'
+      expect(response).to render_template :all_done
+      expect(response.status).to eq 200
     end
   end
 

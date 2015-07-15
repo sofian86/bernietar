@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   # :network identifies Twittter, Facebook, etc.
   get '/explanation/:network', to: 'social#explanation', as: :explanation
 
-  # Update Twitter provile images
-  match '/users/:id/update/twitter' , to: 'users#update_twitter', via: [:post], as: :update_twitter
+  # Update Twitter profile images
+  match '/users/:id/twitter/update', to: 'users#update_twitter', via: [:post], as: :update_twitter
+
+  match '/users/:id/:network/all-done', to: 'social#all_done', via: :get, as: :social_done
 
 end

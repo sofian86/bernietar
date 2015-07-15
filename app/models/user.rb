@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'temporary@bernietar'
   TEMP_EMAIL_REGEX = /\Atemporary@bernietar/
 
-  @twitter_client = nil
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -71,6 +69,7 @@ class User < ActiveRecord::Base
   def current_provider_avatar(provider)
     case provider
       when 'twitter'
+        @twitter_client ||= establish_twitter_client
         @twitter_client.user.profile_image_uri(size = :original)
     end
   end
@@ -81,27 +80,27 @@ class User < ActiveRecord::Base
       when 'twitter'
         encoded_image = Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)
         # Send the base 64 encoded bernietar to twitter
+        @twitter_client ||= establish_twitter_client
         @twitter_client.update_profile_image encoded_image
     end
   end
 
+  private
+
   # Create a client so we can tweet, update images, etc.
   def establish_twitter_client
-    if @twitter_client.nil?
-      puts "establishing twitter client"
-      # Get the oauth info
-      user_token = identities.where(provider:'twitter').pluck(:token).join(" ")
-      user_secret = identities.where(provider:'twitter').pluck(:secret).join(" ")
+    # Get the oauth info
+    user_token = identities.where(provider: 'twitter').pluck(:token).join(" ")
+    user_secret = identities.where(provider: 'twitter').pluck(:secret).join(" ")
 
-      # Setup the client (assuming we have the token and secret)
-      unless user_token.nil? && user_secret.nil?
-        # Establish a Twitter client connection
-        @twitter_client = Twitter::REST::Client.new do |config|
-            config.consumer_key         = Rails.application.secrets.twitter_consumer_key
-            config.consumer_secret      = Rails.application.secrets.twitter_consumer_secret
-            config.access_token         = user_token
-            config.access_token_secret  = user_secret
-        end
+    # Setup the client (assuming we have the token and secret)
+    unless user_token.blank? && user_secret.blank?
+      # Establish a Twitter client connection
+      @twitter_client = Twitter::REST::Client.new do |config|
+        config.consumer_key = Rails.application.secrets.twitter_consumer_key
+        config.consumer_secret = Rails.application.secrets.twitter_consumer_secret
+        config.access_token = user_token
+        config.access_token_secret = user_secret
       end
     end
   end

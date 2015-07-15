@@ -32,6 +32,9 @@ OmniAuth.config.test_mode = true
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
+
+  config.include Devise::TestHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -81,5 +84,10 @@ RSpec.configure do |config|
     stub_request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json").
         with(:headers => {'Accept'=>'application/json'}).
         to_return(:status => 200, :body => File.read("#{fixture_path}/twitter/verify_credentials.json"), :headers => {})
+
+    stub_request(:post, "https://api.twitter.com/1.1/account/update_profile_image.json").
+        with(:body => {"image"=>Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)},
+             :headers => {'Accept'=>'application/json'}).
+        to_return(:status => 200, :body => File.read("#{fixture_path}/twitter/update_profile_image.json"), :headers => {})
   end
 end
