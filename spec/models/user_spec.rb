@@ -31,7 +31,6 @@ RSpec.describe User, type: :model do
       twitter_identity.secret  = ""
       twitter_identity.save
     end
-
     it "should not establish a Twitter client" do
       expect(user.send(:establish_twitter_client)).to eq(nil)
     end

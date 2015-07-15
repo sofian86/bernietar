@@ -30,6 +30,7 @@ gem 'omniauth-linkedin'
 
 # Social APIs
 gem 'twitter'
+gem 'koala', '~> 2.0.0'
 
 # App monitoring
 gem 'newrelic_rpm'

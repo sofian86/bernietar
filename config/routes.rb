@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   # Update Twitter profile images
   match '/twitter/update', to: 'users#update_twitter', via: [:post], as: :update_twitter
 
+  # Upload the Bernietar to Facebook
+  match '/facebook/upload', to: 'users#upload_facebook_bernietar', via: [:post], as: :upload_facebook
+
+  # Displayed after user has just change to Bernietar on a social network
   match ':network/all-done', to: 'social#all_done', via: :get, as: :social_done
 
 end

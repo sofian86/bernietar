@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
       # Twitter first. Might need a few conditions for the various networks
       identity.token  = auth.credentials.token if !auth.credentials.token.nil?
       identity.secret = auth.credentials.secret if !auth.credentials.secret.nil?
-
       identity.save!
     end
     user
@@ -71,6 +70,10 @@ class User < ActiveRecord::Base
       when 'twitter'
         @twitter_client ||= establish_twitter_client
         @twitter_client.user.profile_image_uri(size = :original)
+      when 'facebook'
+        @facebook_graph ||= establish_facebook_graph
+        uid = @facebook_graph.get_object('me')['id']
+        @facebook_graph.get_picture(uid, type:'large')
     end
   end
 
@@ -82,6 +85,9 @@ class User < ActiveRecord::Base
         # Send the base 64 encoded bernietar to twitter
         @twitter_client ||= establish_twitter_client
         @twitter_client.update_profile_image encoded_image
+      when 'facebook'
+        @facebook_graph ||= establish_facebook_graph
+        @facebook_graph.put_picture("#{::Rails.root}/app/assets/images/bernietar.png")
     end
   end
 
@@ -90,8 +96,8 @@ class User < ActiveRecord::Base
   # Create a client so we can tweet, update images, etc.
   def establish_twitter_client
     # Get the oauth info
-    user_token = identities.where(provider: 'twitter').pluck(:token).join(" ")
-    user_secret = identities.where(provider: 'twitter').pluck(:secret).join(" ")
+    user_token  = identities.find_by_provider('twitter').token
+    user_secret = identities.find_by_provider('twitter').secret
 
     # Setup the client (assuming we have the token and secret)
     unless user_token.blank? && user_secret.blank?
@@ -103,5 +109,12 @@ class User < ActiveRecord::Base
         config.access_token_secret = user_secret
       end
     end
+  end
+
+  # Create a facebook graph connection
+  def establish_facebook_graph
+    user_token  = identities.find_by_provider('facebook').token
+    # Setup the graph
+    @facebook_graph = Koala::Facebook::API.new(user_token) unless user_token.blank?
   end
 end

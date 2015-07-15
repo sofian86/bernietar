@@ -28,7 +28,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # redirect to /explanation/:provider
       explanation_path(@network)
     else
-      # just Twitter for now
+      # just Twitter for now. Pretty sure you can't be on Facebook without an email
       finish_signup_path(resource)
     end
   end

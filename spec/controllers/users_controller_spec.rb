@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
 
-  let (:twitter) { create(:identity, :twitter) }
+  let (:twitter)  { create(:identity, :twitter) }
+  let (:facebook) { create(:identity, :facebook) }
 
   describe "POST #update_twitter" do
     it "makes an API call to Twitter and updates the avatar" do
@@ -14,6 +15,15 @@ RSpec.describe UsersController, type: :controller do
     context "gets accessed by a non-user" do
       it "should deny access" do
         post :update_twitter, id:nil
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe "POST #upload_facebook_bernietar" do
+    context "gets accessed by a non-user" do
+      it "should deny access" do
+        post :upload_facebook_bernietar
         expect(response).to redirect_to new_user_session_path
       end
     end
