@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  before_action :authenticate_user!, only: [:update_twitter]
 
   # GET /users/:id.:format
   def show
@@ -54,9 +55,10 @@ class UsersController < ApplicationController
 
   def update_twitter
     if current_user.update_provider_avatar('twitter')
-      redirect_to social_done_path( current_user, 'twitter' )
+      redirect_to social_done_path 'twitter'
     else
-      # Didn't work
+      redirect_to root_path
+      flash[:error] = "You can't do that. Please try logging in first."
     end
   end
 

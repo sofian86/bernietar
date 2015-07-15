@@ -32,4 +32,14 @@ module SocialHelper
     end
   end
 
+  # Return the appropriate verb based on the social network
+  def network_verb(provider)
+    case provider
+      when 'twitter'
+        'tweet'
+      when 'facebook'
+        'post'
+    end
+  end
+
 end
