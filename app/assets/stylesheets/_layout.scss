@@ -46,7 +46,7 @@ body, html {
 // .band-color
 .band {
   position: relative;
-  padding:20px 0;
+  padding:40px 0;
   width:100%;
 
   &:before {
@@ -80,13 +80,21 @@ body, html {
   list-style-type: none;
   text-align: center;
   padding:0;
+  margin-top:30px;
 
   li {
-    display: inline-block;
-    margin-right:30px;
+    margin-bottom:15px;
+  }
 
-    &:last-child {
-      margin-right:0;
+  @include sm-screen {
+    li {
+      display: inline-block;
+      margin-right:30px;
+      margin-bottom:auto;
+
+      &:last-child {
+        margin-right:0;
+      }
     }
   }
 }
@@ -125,7 +133,7 @@ body, html {
   color:#fff;
   padding:30px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  margin-top:-50px;
+  margin-top:-70px;
 
   a {
     color:#fff;
@@ -134,5 +142,54 @@ body, html {
       text-decoration: none;
       opacity:0.8;
     }
+  }
+}
+
+.add-email-container {
+  margin-top:30px;
+
+  .actions {
+    margin-top:40px;
+    margin-bottom:20px;
+  }
+}
+
+.avatar {
+  border-radius:10px;
+}
+
+.final-avatar {
+  max-width:300px;
+  margin:0 auto 20px;
+}
+
+.table-container {
+  display: table;
+
+  .table-row {
+    height: 100%;
+    display: table-row;
+
+    .table-col {
+      display: table-cell;
+      float: none;
+      vertical-align: top;
+    }
+  }
+}
+
+.vmiddle {
+  vertical-align: middle !important;
+}
+
+.avatar-update-example {
+  margin-bottom:45px;
+  margin-top:30px;
+}
+
+.social-status {
+  margin-bottom:30px;
+  .media-left img {
+    width:50px;
   }
 }

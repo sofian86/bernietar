@@ -1,15 +1,34 @@
 <div class="band band-primary">
   <div class="page-header">
-	<h1 class="text-center">Awesome</h1>
-	<h3 class="text-center">Here's what's going to happen to your <em><%= @network %></em> profile</h3>
+	  <h1 class="text-center fit-text">Awesome</h1>
+	  <h3 class="text-center subhead"><%= current_user.name %>, here's what's going to happen to your <em><%= @network %></em> profile</h3>
   </div>
 </div>
 
 <div class="band band-gray">
-  <p>[Insert graphic]</p>
+
+  <div class="table-container avatar-update-example">
+    <div class="row table-row">
+      <div class="col-xs-5 table-col">
+        <%= image_tag @current_avatar, class:'avatar center-block img-responsive' %>
+      </div>
+      <div class="col-xs-2 table-col vmiddle text-center">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="col-xs-5 table-col">
+        <%= image_tag 'bernietar.png', class:'avatar center-block img-responsive' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h5 class="text-sans text-center explain-the-update">We'll update your current avatar to the Bernietar so you can show your support every time you <%= network_verb @network %>.</h5>
+    </div>
+  </div>
 
   <div class="text-center">
-	<%= link_to 'Okay, do it!', '#', class: 'btn btn-lg btn-success' %>
+	  <%= link_to 'Okay, do it!', update_twitter_path, method: :post, class: 'btn btn-lg btn-success' %>
   </div>
 </div>
 

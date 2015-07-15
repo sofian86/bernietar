@@ -1,7 +1,23 @@
 FactoryGirl.define do
   factory :identity do
-    provider      'twitter'
-    uid           Random.rand.to_s[2..11]
+    provider      'network' # make sure to define a trait from below
+    uid           { Faker::Number.number(11) }
+    token         "lk;j23roj;pasojf"
+    secret        "ljkpaoiwefjojoij8oiuhjsdf"
     association   :user
+
+    trait :twitter do
+      after(:create) do |identity|
+        identity.provider = 'twitter'
+        identity.save
+      end
+    end
+
+    trait :facebook do
+      after(:create) do |identity|
+        identity.provider = 'facebook'
+        identity.save
+      end
+    end
   end
 end

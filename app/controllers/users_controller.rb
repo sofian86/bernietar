@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  before_action :authenticate_user!, only: [:update_twitter]
 
   # GET /users/:id.:format
   def show
@@ -27,15 +28,13 @@ class UsersController < ApplicationController
   end
 
 
-  # This is just for Twitter at the moment. Occurs after they offer
-  # their email
   def finish_signup
     # authorize! :update, @user
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
         # @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to explanation_path(), notice: 'Your profile was successfully updated.'
+        redirect_to explanation_path(:twitter)
       else
         @show_errors = true
       end
@@ -50,6 +49,16 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :no_content }
+    end
+  end
+
+
+  def update_twitter
+    if current_user.update_provider_avatar('twitter')
+      redirect_to social_done_path 'twitter'
+    else
+      redirect_to root_path
+      flash[:error] = "You can't do that. Please try logging in first."
     end
   end
 

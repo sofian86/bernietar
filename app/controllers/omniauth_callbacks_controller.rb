@@ -21,11 +21,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource)
     super resource
+    @network = params[:action]
 
     if resource.email_verified?
       # super resource
-      # redirect to something like /explanation/facebook
-      @network = params[:action]
+      # redirect to /explanation/:provider
       explanation_path(@network)
     else
       # just Twitter for now

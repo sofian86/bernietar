@@ -14,5 +14,5 @@
 
   <p><%= social_bucket_copy(network.downcase) %></p>
 
-  <%= link_to 'Start', user_omniauth_authorize_path(provider_corrector(network)), class:'btn btn-lg btn-danger' %>
+  <%= start_or_update_button(network.downcase) %>
 </div>

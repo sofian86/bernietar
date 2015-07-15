@@ -4,6 +4,8 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'support/devise'
+require 'support/omniauth_macros'
+require 'webmock/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -25,9 +27,26 @@ require 'support/devise'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+OmniAuth.config.test_mode = true
+
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
+
+  config.include Devise::TestHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # Allows us to run js tests
+  config.before(:each) do |example|
+    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -51,4 +70,24 @@ RSpec.configure do |config|
 
   # Include Factory Girl syntax to simplify calls to factories
   config.include FactoryGirl::Syntax::Methods
+
+  # Help stub some responses from the social networks
+  config.include OmniauthMacros
+
+  # Define the location of all our stubbed fixtures
+  config.fixture_path = "#{::Rails.root}/spec/support/fixtures"
+
+  # Stubbing with Webmock
+  config.before(:each) do
+
+    # Used when creating the Twitter client from the Twitter gem
+    stub_request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json").
+        with(:headers => {'Accept'=>'application/json'}).
+        to_return(:status => 200, :body => File.read("#{fixture_path}/twitter/verify_credentials.json"), :headers => {})
+
+    stub_request(:post, "https://api.twitter.com/1.1/account/update_profile_image.json").
+        with(:body => {"image"=>Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)},
+             :headers => {'Accept'=>'application/json'}).
+        to_return(:status => 200, :body => File.read("#{fixture_path}/twitter/update_profile_image.json"), :headers => {})
+  end
 end
