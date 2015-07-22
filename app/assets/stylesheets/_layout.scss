@@ -194,3 +194,24 @@ body, html {
     width:50px;
   }
 }
+
+.well-outline {
+  border-width:2px;
+  border-style: solid;
+  border-radius: 5px;
+  padding:20px;
+  margin-bottom:20px;
+
+  &.well-outline-primary {
+    border-color:$brand-primary;
+    background: #fff;
+  }
+}
+
+.row-margin-bottom {
+  margin-bottom:30px;
+}
+
+.inactive {
+  opacity: 0.3;
+}

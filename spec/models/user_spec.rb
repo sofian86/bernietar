@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should update the user's Twitter avatar" do
-    expect(twitter.user.update_provider_avatar('twitter')).to be_an_instance_of(Twitter::User)
+    expect(twitter.user.update_twitter_avatar).to be_an_instance_of(Twitter::User)
   end
 
   it "should establish a Twitter client" do
@@ -26,13 +26,12 @@ RSpec.describe User, type: :model do
 
   context "doesn't have token or secret saved" do
     before do
-      twitter_identity = create(:identity, user:user)
-      twitter_identity.token   = ""
-      twitter_identity.secret  = ""
-      twitter_identity.save
+      twitter.token   = ""
+      twitter.secret  = ""
+      twitter.save
     end
     it "should not establish a Twitter client" do
-      expect(user.send(:establish_twitter_client)).to eq(nil)
+      expect(twitter.user.send(:establish_twitter_client)).to eq(nil)
     end
   end
 end

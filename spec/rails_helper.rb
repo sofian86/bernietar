@@ -89,5 +89,14 @@ RSpec.configure do |config|
         with(:body => {"image"=>Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)},
              :headers => {'Accept'=>'application/json'}).
         to_return(:status => 200, :body => File.read("#{fixture_path}/twitter/update_profile_image.json"), :headers => {})
+
+    # Requests to the 'me' object
+    stub_request(:get, "https://graph.facebook.com/me?access_token=a1b2c3d4...").
+         with(:headers => {'Accept'=>'*/*'}).
+         to_return(:status => 200, :body => File.read("#{fixture_path}/facebook/get_object_me.json"), :headers => {})
+
+    stub_request(:get, "https://graph.facebook.com/123456787/picture?access_token=a1b2c3d4...&type=large").
+         with(:headers => {'Accept'=>'*/*'}).
+         to_return(:status => 200, :body => "", :headers => {})
   end
 end
