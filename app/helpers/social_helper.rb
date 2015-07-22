@@ -45,9 +45,9 @@ module SocialHelper
   def network_explanation(provider)
     case provider
       when 'twitter'
-        content_tag 'p', "We'll update your current avatar to the Bernietar so you can show your support every time you #{network_verb @network}. It just takes a single click and you'll be off and running. Pretty simple, huh?", class:'explanation'
+        render 'social/network_explanation_twitter'
       when 'facebook'
-        content_tag 'p', "We'll upload a Bernietar to Facebook before sending you over to complete the process. You'll simply need to confirm that you would like to use the Bernietar as your profile image.", class:'explanation'
+        render 'social/network_explanation_facebook'
     end
   end
 
