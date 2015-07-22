@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     end
   end
 
-
+  # If we don't have a confirmed email...
   def finish_signup
     # authorize! :update, @user
     if request.patch? && params[:user] #&& params[:user][:email]
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
 
   def update_twitter
-    if current_user.update_provider_avatar('twitter')
+    if current_user.update_twitter_avatar
       redirect_to social_done_path 'twitter'
     else
       redirect_to root_path
@@ -62,13 +62,15 @@ class UsersController < ApplicationController
     end
   end
 
-
+  # Uploads the bernietar to facebook in its own album. Doesn't set the profile image because there is no API call
+  # for that.
   def upload_facebook_bernietar
-    if current_user.update_provider_avatar('facebook')
+    @upload = current_user.upload_facebook_avatar
+    if @upload
       redirect_to root_path
     else
       redirect_to root_path
-      flash[:error] = "You can't do that. Please try logging in first."
+      flash[:error] = "Oops! Something went wrong."
     end
   end
 

@@ -30,14 +30,14 @@ body, html {
   .bernietar {
     width:300px;
     position: absolute;
-    bottom:-36px;
+    bottom:-55px;
     left:0;
     right:0;
     margin:0 auto;
 
     @include sm-screen {
       width:350px;
-      bottom:-40px;
+      bottom:-65px;
     }
   }
 }

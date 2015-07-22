@@ -77,18 +77,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Update twitter avatar
+  def update_twitter_avatar
+    encoded_image = Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)
+    # Send the base 64 encoded bernietar to twitter
+    @twitter_client ||= establish_twitter_client
+    @twitter_client.update_profile_image encoded_image
+  end
+
   # Update the avatar for the appropriate provider
-  def update_provider_avatar(provider)
-    case provider
-      when 'twitter'
-        encoded_image = Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)
-        # Send the base 64 encoded bernietar to twitter
-        @twitter_client ||= establish_twitter_client
-        @twitter_client.update_profile_image encoded_image
-      when 'facebook'
-        @facebook_graph ||= establish_facebook_graph
-        @facebook_graph.put_picture("#{::Rails.root}/app/assets/images/bernietar.png")
-    end
+  def upload_facebook_avatar
+    @facebook_graph ||= establish_facebook_graph
+    @facebook_graph.put_picture("#{::Rails.root}/app/assets/images/bernietar.png")
   end
 
   private
