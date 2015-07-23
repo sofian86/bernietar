@@ -63,6 +63,7 @@ group :development, :test do
   # Testing
   gem 'rspec-rails'
   gem 'faker', '~> 1.4.3'
+  gem 'vcr', '~> 2.9.3'
 
   # Build data
   gem 'factory_girl_rails'
@@ -77,4 +78,3 @@ group :test do
   # Stub data
   gem 'webmock'
 end
-

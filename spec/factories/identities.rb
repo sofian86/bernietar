@@ -16,6 +16,7 @@ FactoryGirl.define do
     trait :facebook do
       after(:create) do |identity|
         identity.provider = 'facebook'
+        identity.token = 'CAAMBWjkFywEBALy9rrfvPvfI3utSPbKb6zM8pFrmH3ZAZCmliTR0K4oiho2XMzSHOWT1T7ZAVMwjriegygZBoAabQhLLZCR1ZADmTsmxBvl6ZBrtxQAIQP0wAIyTXM5gYernkDGlhnXGxoyiTuxBjkmZBI1MekZA2Vg3cwZAlhvD4clZAJSmdcNIzM4arJMnzmxuJZBfCwSpqSXDKz20Ja9WOaup'
         identity.save
       end
     end

@@ -5,7 +5,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'support/devise'
 require 'support/omniauth_macros'
+require 'support/vcr_setup'
 require 'webmock/rspec'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -87,7 +89,7 @@ RSpec.configure do |config|
 
     stub_request(:post, "https://api.twitter.com/1.1/account/update_profile_image.json").
         with(:body => {"image"=>Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)},
-             :headers => {'Accept'=>'application/json'}).
+          :headers => {'Accept'=>'application/json'}).
         to_return(:status => 200, :body => File.read("#{fixture_path}/twitter/update_profile_image.json"), :headers => {})
 
     # Requests to the 'me' object
