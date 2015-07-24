@@ -26,9 +26,9 @@ module SocialHelper
   # TODO - This also needs to check the current avatar and match against the filename...possibly.
   def start_or_update_button(provider)
     if user_signed_in? && !current_user.identities.where(provider: provider).blank?
-      link_to 'Update', explanation_path(provider_corrector(provider)), class:'btn btn-lg btn-danger', id:"#{provider}-update"
+      link_to 'Update', explanation_path(provider_corrector(provider)), class:'btn btn-margin btn-danger', id:"#{provider}-update"
     else
-      link_to 'Start', user_omniauth_authorize_path(provider_corrector(provider)), class:'btn btn-lg btn-danger', id:"#{provider}-start"
+      link_to 'Start', user_omniauth_authorize_path(provider_corrector(provider)), class:'btn btn-margin btn-danger', id:"#{provider}-start"
     end
   end
 
