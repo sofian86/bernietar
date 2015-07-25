@@ -10,6 +10,7 @@ class FacebookActionsController < ApplicationController
   def upload_facebook_bernietar
     if current_user.facebook_graph.put_picture("#{::Rails.root}/app/assets/images/bernietar.png")
       flash[:success] = "Great. We've uploaded your Bernitar. On to step 2."
+      params[:step] = 2
       redirect_to facebook_explanation_path
     else
       redirect_to root_path

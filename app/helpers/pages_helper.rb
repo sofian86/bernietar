@@ -43,15 +43,6 @@ module PagesHelper
     end
   end
 
-  def network_explanation(provider)
-    case provider
-      when 'twitter'
-        render 'network_explanation_twitter'
-      when 'facebook'
-        render 'network_explanation_facebook'
-    end
-  end
-
   private
 
   def determine_explanation_path(provider)
