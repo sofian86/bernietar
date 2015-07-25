@@ -50,7 +50,7 @@ module PagesHelper
     when 'twitter'
       twitter_explanation_path
     when 'facebook'
-      facebook_explanation_path
+      facebook_explanation_path 1
     end
   end
 

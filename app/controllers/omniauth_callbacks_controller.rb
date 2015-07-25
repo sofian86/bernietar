@@ -30,7 +30,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       when 'twitter'
         twitter_explanation_path
       when 'facebook'
-        facebook_explanation_path
+        facebook_explanation_path 1
       end
     else
       # just Twitter for now. Pretty sure you can't be on Facebook without an email

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   # :network identifies Twittter, Facebook, etc.
-  get '/explanation/facebook', to: 'facebook_actions#explanation', as: :facebook_explanation
+  get '/explanation/facebook/:step', to: 'facebook_actions#explanation', as: :facebook_explanation
   get '/explanation/twitter', to: 'twitter_actions#explanation', as: :twitter_explanation
 
   get '/twitter/avatar', to: 'twitter_actions#foobar', as: :twitter_avatar

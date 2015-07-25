@@ -6,7 +6,7 @@
     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
       <div class="row row-margin-bottom">
         <div class="col-sm-6">
-          <div class="well-outline well-outline-primary" id="fb-step-1">
+          <div class="well-outline well-outline-primary <%= active_step? 1 %>" id="fb-step-1">
             <h3 class="text-primary">
         		    <span class="light">Step 1</span> Upload Bernietar
         	  </h3>
@@ -17,13 +17,13 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="well-outline well-outline-primary inactive" id="fb-step-2">
+          <div class="well-outline well-outline-primary <%= active_step? 2 %>" id="fb-step-2">
             <h3 class="text-primary">
         		    <span class="light">Step 2</span> Confirm change
         	  </h3>
             <p>Now that your Facebook account has a Bernietar, let's set it as your profile image so everyone can see it. We're going to send you to Facebook to finish things up.</p>
             <div class="text-center">
-              <%= link_to 'Go to Facebook', '#', class:'btn btn-success btn-margin', disabled:'disabled' %>
+              <%= finalize_facebook_button %>
             </div>
           </div>
         </div>

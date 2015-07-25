@@ -77,11 +77,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def save_facebook_bernietar_id(id)
+    identity = facebook_identity
+    identity.bernietar_location = id
+    identity.save
+  end
+
   # Create a client so we can tweet, update images, etc.
   def twitter_client
     # Get the oauth info
-    user_token  = identities.find_by_provider('twitter').token
-    user_secret = identities.find_by_provider('twitter').secret
+    user_token  = twitter_identity.token
+    user_secret = twitter_identity.secret
 
     # Setup the client (assuming we have the token and secret)
     unless user_token.blank? && user_secret.blank?
@@ -97,9 +103,18 @@ class User < ActiveRecord::Base
 
   # Create a facebook graph connection
   def facebook_graph
-    user_token  = identities.find_by_provider('facebook').token
+    user_token  = facebook_identity.token
     # Setup the graph
     Koala::Facebook::API.new(user_token) unless user_token.blank?
   end
+
+  def facebook_identity
+    identities.find_by_provider 'facebook'
+  end
+
+  def twitter_identity
+    identities.find_by_provider 'twitter'
+  end
+
 
 end
