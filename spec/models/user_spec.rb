@@ -17,23 +17,13 @@ RSpec.describe User, type: :model do
     expect(twitter.user.current_provider_avatar('twitter')).to be_a_kind_of(Addressable::URI)
   end
 
-  it "should update the user's Twitter avatar" do
-    expect(twitter.user.update_twitter_avatar).to be_an_instance_of(Twitter::User)
-  end
-
   it "should establish a Twitter client" do
-    expect(twitter.user.send(:establish_twitter_client)).to be_an_instance_of(Twitter::REST::Client)
+    expect(twitter.user.send(:twitter_client)).to be_an_instance_of(Twitter::REST::Client)
   end
 
   it "should establish a Facebook graph client" do
-    VCR.use_cassette 'user/establish_facebook_graph' do
-      expect(facebook.user.send(:establish_facebook_graph)).to be_an_instance_of(Koala::Facebook::API)
-    end
-  end
-
-  it "should upload the Bernietar to Facebook" do
-    VCR.use_cassette 'user/upload_facebook_avatar' do
-      expect(facebook.user.upload_facebook_avatar).to be_kind_of(Hash)
+    VCR.use_cassette 'user/facebook_graph' do
+      expect(facebook.user.send(:facebook_graph)).to be_an_instance_of(Koala::Facebook::API)
     end
   end
 
@@ -44,7 +34,7 @@ RSpec.describe User, type: :model do
       twitter.save
     end
     it "should not establish a Twitter client" do
-      expect(twitter.user.send(:establish_twitter_client)).to eq(nil)
+      expect(twitter.user.send(:twitter_client)).to eq(nil)
     end
   end
 end

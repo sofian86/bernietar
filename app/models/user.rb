@@ -68,33 +68,17 @@ class User < ActiveRecord::Base
   def current_provider_avatar(provider)
     case provider
       when 'twitter'
-        @twitter_client ||= establish_twitter_client
+        @twitter_client ||= twitter_client
         @twitter_client.user.profile_image_uri(size = :original)
       when 'facebook'
-        @facebook_graph ||= establish_facebook_graph
+        @facebook_graph ||= facebook_graph
         uid = @facebook_graph.get_object('me')['id']
         @facebook_graph.get_picture(uid, type:'large')
     end
   end
 
-  # Update twitter avatar
-  def update_twitter_avatar
-    encoded_image = Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)
-    # Send the base 64 encoded bernietar to twitter
-    @twitter_client ||= establish_twitter_client
-    @twitter_client.update_profile_image encoded_image
-  end
-
-  # Update the avatar for the appropriate provider
-  def upload_facebook_avatar
-    @facebook_graph ||= establish_facebook_graph
-    @facebook_graph.put_picture("#{::Rails.root}/app/assets/images/bernietar.png")
-  end
-
-  private
-
   # Create a client so we can tweet, update images, etc.
-  def establish_twitter_client
+  def twitter_client
     # Get the oauth info
     user_token  = identities.find_by_provider('twitter').token
     user_secret = identities.find_by_provider('twitter').secret
@@ -102,7 +86,7 @@ class User < ActiveRecord::Base
     # Setup the client (assuming we have the token and secret)
     unless user_token.blank? && user_secret.blank?
       # Establish a Twitter client connection
-      @twitter_client = Twitter::REST::Client.new do |config|
+      Twitter::REST::Client.new do |config|
         config.consumer_key = Rails.application.secrets.twitter_consumer_key
         config.consumer_secret = Rails.application.secrets.twitter_consumer_secret
         config.access_token = user_token
@@ -112,9 +96,10 @@ class User < ActiveRecord::Base
   end
 
   # Create a facebook graph connection
-  def establish_facebook_graph
+  def facebook_graph
     user_token  = identities.find_by_provider('facebook').token
     # Setup the graph
-    @facebook_graph = Koala::Facebook::API.new(user_token) unless user_token.blank?
+    Koala::Facebook::API.new(user_token) unless user_token.blank?
   end
+
 end

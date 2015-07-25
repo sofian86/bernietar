@@ -2,7 +2,9 @@ require 'rails_helper'
 
 feature "Twitter authentication" do
 
-  subject {page}
+  let(:twitter) { create(:identity, :twitter) }
+
+  subject { page }
 
   describe "home page" do
     before { visit root_path }
@@ -32,9 +34,9 @@ feature "Twitter authentication" do
 
         it { should have_content "Awesome" }
         it { should have_content "here's what's going to happen to your twitter profile" }
+        it { should have_link 'Okay, do it!' }
       end
 
     end
   end
-
 end
