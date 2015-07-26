@@ -14,7 +14,7 @@ module PagesHelper
   def social_bucket_copy(provider)
     case provider
       when 'facebook'
-        "Bernie's largest social reach is on Facebook. Help him further that effort by updating your Facebook avatar and cover photo."
+        "Bernie's largest social reach is on Facebook. Help him further that effort by updating your Facebook profile photo and starting a conversation with friends and family."
       when 'twitter'
         "Twitter's inherently public nature makes it a great way to get the word out. Help the Twitter community <a href='https://twitter.com/search?q=%23FeelTheBern&src=tyah' target=''_blank'>#FeelTheBern</a> by updating your avatar and header photo here.".html_safe
       when "linkedin"
@@ -27,9 +27,9 @@ module PagesHelper
   def start_or_update_button(provider)
     explanation_path = determine_explanation_path provider
     if user_signed_in? && !current_user.identities.where(provider: provider).blank?
-      link_to 'Update', explanation_path, class:'btn btn-margin btn-danger', id:"#{provider}-update"
+      link_to 'Update', explanation_path, class:'btn btn-margin btn-danger btn-wide', id:"#{provider}-update"
     else
-      link_to 'Start', user_omniauth_authorize_path(provider_corrector(provider)), class:'btn btn-margin btn-danger', id:"#{provider}-start"
+      link_to 'Start', user_omniauth_authorize_path(provider_corrector(provider)), class:'btn btn-margin btn-danger btn-wide', id:"#{provider}-start"
     end
   end
 

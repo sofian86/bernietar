@@ -27,4 +27,7 @@ Rails.application.routes.draw do
   # Displayed after user has just change to Bernietar on a social network
   match ':network/all-done', to: 'pages#all_done', via: :get, as: :social_done
 
+  # Bernietar download link
+  match '/download/bernietar', to: 'pages#download_bernietar', via: :get, as: :download_bernietar
+
 end

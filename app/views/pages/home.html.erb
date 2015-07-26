@@ -16,37 +16,53 @@
   		    <%= render partial: 'social_start', locals: {network:'Twitter'} %>
   	  </div>
   	  <div class="col-sm-4">
-  		    <%= render partial: 'social_start', locals: {network:'LinkedIn'} %>
+        <div class="social-bucket">
+          <div class="media media-social">
+          	<div class="media-left">
+          	  <a href="#">
+      		        <i class="fa fa-download"></i>
+          	  </a>
+          	</div>
+          	<div class="media-body">
+          	  <h3 class="text-primary media-heading">
+          		    <span class="light">Update</span> Anything
+          	  </h3>
+          	</div>
+          </div>
+          <p>You can make an impact anywhere you hangout online. Download your Bernietar and use it
+          as your profile picture on the social network of your choosing.</p>
+          <div class="text-center">
+            <%= link_to 'Download', download_bernietar_path, class:'btn btn-margin btn-danger btn-wide' %>
+          </div>
+        </div>
   	  </div>
   	</div>
   </div>
 </div>
 
 
-	<% if current_user.nil? %>
-		<h3>Login options</h3>
-		<ul>
-		  <li><%= link_to 'Login with Twitter', user_omniauth_authorize_path(:twitter) %></li>
-		  <li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook) %></li>
-		</ul>
-	<% else %>
-		<p><%= "Welcome #{current_user.name}" %></p>
-		<p>You're currently logged into:</p>
-		<ul>
-		  <% current_user.identities.each do |i| %>
-			  <li><%= i.provider %></li>
-		  <% end %>
-		</ul>
-		<hr/>
+<% if current_user.nil? %>
+	<h3>Login options</h3>
+	<ul>
+	  <li><%= link_to 'Login with Twitter', user_omniauth_authorize_path(:twitter) %></li>
+	  <li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook) %></li>
+	</ul>
+<% else %>
+	<p><%= "Welcome #{current_user.name}" %></p>
+	<p>You're currently logged into:</p>
+	<ul>
+	  <% current_user.identities.each do |i| %>
+		  <li><%= i.provider %></li>
+	  <% end %>
+	</ul>
+	<hr/>
 
-		<h3>Other Login options</h3>
-		<ul>
-		  <li><%= link_to 'Login with Twitter', user_omniauth_authorize_path(:twitter) %></li>
-		  <li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook) %></li>
-		</ul>
+	<h3>Other Login options</h3>
+	<ul>
+	  <li><%= link_to 'Login with Twitter', user_omniauth_authorize_path(:twitter) %></li>
+	  <li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook) %></li>
+	</ul>
 
-		<hr/>
-		<p><%= link_to 'Log out', destroy_user_session_path, method: :delete %></p>
-	<% end %>
-  </div>
-</div>
+	<hr/>
+	<p><%= link_to 'Log out', destroy_user_session_path, method: :delete %></p>
+<% end %>
