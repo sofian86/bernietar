@@ -234,3 +234,27 @@ body, html {
     color:#fff;
   }
 }
+
+.copyright {
+  margin-top:25px;
+  margin-bottom:50px;
+  font-size:14px;
+}
+
+.login-options {
+  text-align:center;
+
+  .login-option {
+    display: inline-block;
+    margin-right:50px;
+
+    &:last-child {
+      margin-right:0;
+    }
+
+    img {
+      display: block;
+      margin-bottom:15px;
+    }
+  }
+}

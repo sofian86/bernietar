@@ -78,3 +78,32 @@
     }
   }
 }
+
+.subhead {
+  font-size:16px;
+  font-weight: 300;
+  color:$gray-lighter;
+
+  @include sm-screen {
+    font-size:18px;
+  }
+}
+
+.faqs {
+  h4 {
+    color:$brand-red;
+    margin-top:30px;
+  }
+}
+
+h2, h3 {
+  span {
+    font-family: $font-family-sans-serif;
+    color:$brand-red;
+    font-weight:300;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    font-size:18px;
+  }
+}

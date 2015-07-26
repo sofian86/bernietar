@@ -15,11 +15,15 @@
         <li><%= link_to 'Bernie on Facebook', 'https://www.facebook.com/berniesanders', target: '_blank' %></li>
       </ul>
     </footer>
+    <div class="text-center copyright">
+      <p style="font-size:16px;">&copy; Copyright <%= Time.now.year %>. Bernietar.com. All Rights Reserved. <%= link_to 'Privacy Policy', privacy_path %>.</p>
+      <p>This site is not a part of the official campaign. I just like Bernie's message and wanted to help :)</p>
+    </div>
+
   </div>
 </div>
 
-
 <%= render 'shared/debug' if Rails.env.development? %>
-
+<%= render 'shared/google_analytics' if Rails.env.production? %>
 </body>
 </html>

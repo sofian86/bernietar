@@ -1,35 +1,21 @@
 <div class="band band-primary">
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-      <h2 class="text-center">Log in</h2>
+      <h1 class="text-center">Login Options</h1>
+      <h3 class="text-center text-sans subhead">You can login with the following social networks.</h3>
+    </div>
+  </div>
+</div>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-        <div class="form-group">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, class:'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "off", class:'form-control' %>
-        </div>
-
-        <% if devise_mapping.rememberable? -%>
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </label>
-          </div>
-        <% end -%>
-
-        <div class="actions">
-          <%= f.submit "Log in", class:'btn btn-success' %>
-        </div>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
+<div class="band band-gray">
+  <div class="login-options">
+    <div class="login-option">
+      <%= link_to image_tag('icon-facebook.png'), user_omniauth_authorize_path(:facebook) %>
+      <%= link_to 'Start', user_omniauth_authorize_path(:facebook), class:'btn btn-danger' %>
+    </div>
+    <div class="login-option">
+      <%= link_to image_tag('icon-twitter.png'), user_omniauth_authorize_path(:twitter) %>
+      <%= link_to 'Start', user_omniauth_authorize_path(:twitter), class:'btn btn-danger' %>
     </div>
   </div>
 </div>

@@ -33,4 +33,7 @@ Rails.application.routes.draw do
   # About page
   match '/about', to: 'pages#about', via: :get, as: :about
 
+  # Privacy page
+  match '/privacy', to: 'pages#privacy', via: :get, as: :privacy
+
 end
