@@ -16,7 +16,7 @@ module PagesHelper
       when 'facebook'
         "Bernie's largest social reach is on Facebook. Help him further that effort by updating your Facebook profile photo and starting a conversation with friends and family."
       when 'twitter'
-        "Twitter's inherently public nature makes it a great way to get the word out. Help the Twitter community <a href='https://twitter.com/search?q=%23FeelTheBern&src=tyah' target=''_blank'>#FeelTheBern</a> by updating your avatar and header photo here.".html_safe
+        "Twitter's inherently public nature makes it a great way to get the word out. Help the Twitter community <a href='https://twitter.com/search?q=%23FeelTheBern&src=tyah' target=''_blank'>#FeelTheBern</a> by updating your Twitter profile photo.".html_safe
       when "linkedin"
         "People use LinkedIn?"
     end

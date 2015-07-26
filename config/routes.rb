@@ -30,4 +30,7 @@ Rails.application.routes.draw do
   # Bernietar download link
   match '/download/bernietar', to: 'pages#download_bernietar', via: :get, as: :download_bernietar
 
+  # About page
+  match '/about', to: 'pages#about', via: :get, as: :about
+
 end

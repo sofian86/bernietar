@@ -1,7 +1,7 @@
 <div class="band band-primary">
   <div class="hero">
 	<h1 class="text-center">Bernietar</h1>
-	<h3 class="text-center text-sans">Show support for Bernie 2016 via your social media avatars.</h3>
+	<h3 class="text-center text-sans">Show support for Bernie Sanders 2016 by changing your social media profile photos.</h3>
   	<%= image_tag 'bernitar-logo.png', alt:'Bernietar', class:'bernietar' %>
   </div>
 </div>
@@ -39,30 +39,3 @@
   	</div>
   </div>
 </div>
-
-
-<% if current_user.nil? %>
-	<h3>Login options</h3>
-	<ul>
-	  <li><%= link_to 'Login with Twitter', user_omniauth_authorize_path(:twitter) %></li>
-	  <li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook) %></li>
-	</ul>
-<% else %>
-	<p><%= "Welcome #{current_user.name}" %></p>
-	<p>You're currently logged into:</p>
-	<ul>
-	  <% current_user.identities.each do |i| %>
-		  <li><%= i.provider %></li>
-	  <% end %>
-	</ul>
-	<hr/>
-
-	<h3>Other Login options</h3>
-	<ul>
-	  <li><%= link_to 'Login with Twitter', user_omniauth_authorize_path(:twitter) %></li>
-	  <li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook) %></li>
-	</ul>
-
-	<hr/>
-	<p><%= link_to 'Log out', destroy_user_session_path, method: :delete %></p>
-<% end %>

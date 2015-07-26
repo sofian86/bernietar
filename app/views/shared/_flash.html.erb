@@ -1,6 +1,8 @@
 <% flash.each do |key, value| %>
 	<%= content_tag :div, class: "alert alert-#{key} alert-full fade in" do %>
-		<%= value %>
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<div class="container">
+			<%= value %>
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		</div>
 	<% end %>
 <% end %>

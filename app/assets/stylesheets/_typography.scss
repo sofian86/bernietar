@@ -66,3 +66,15 @@
 .text-success {
   color:$brand-success;
 }
+
+.navbar-default {
+  .navbar-brand {
+    font-family:$font-family-serif;
+    font-weight:700;
+    color:$brand-primary;
+
+    &:hover {
+      color:$brand-danger;
+    }
+  }
+}

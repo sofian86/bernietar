@@ -15,6 +15,9 @@ class PagesController < ApplicationController
     @network = params[:network]
   end
 
+  def about
+  end
+
   def download_bernietar
     send_file(
       "#{Rails.root}/public/bernietar.png",
