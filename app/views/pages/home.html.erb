@@ -8,17 +8,17 @@
 
 <div class="band band-gray">
   <div class="container home-explanation">
-	<div class="row">
-	  <div class="col-sm-4">
-		<%= render partial: 'social/social_start', locals: {network:'Facebook'} %>
-	  </div>
-	  <div class="col-sm-4">
-		<%= render partial: 'social/social_start', locals: {network:'Twitter'} %>
-	  </div>
-	  <div class="col-sm-4">
-		<%= render partial: 'social/social_start', locals: {network:'LinkedIn'} %>
-	  </div>
-	</div>
+  	<div class="row">
+  	  <div class="col-sm-4">
+  		    <%= render partial: 'social_start', locals: {network:'Facebook'} %>
+  	  </div>
+  	  <div class="col-sm-4">
+  		    <%= render partial: 'social_start', locals: {network:'Twitter'} %>
+  	  </div>
+  	  <div class="col-sm-4">
+  		    <%= render partial: 'social_start', locals: {network:'LinkedIn'} %>
+  	  </div>
+  	</div>
   </div>
 </div>
 
@@ -50,4 +50,3 @@
 	<% end %>
   </div>
 </div>
-

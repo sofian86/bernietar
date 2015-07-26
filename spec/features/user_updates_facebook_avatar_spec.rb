@@ -21,8 +21,6 @@ feature "Facebook authentication" do
 
       it { should have_content "Awesome" }
       it { should have_content "here's what's going to happen to your facebook profile" }
-
     end
   end
-
 end

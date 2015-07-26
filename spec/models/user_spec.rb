@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
 
   let(:user) { create(:user) }
   let(:twitter) { create(:identity, :twitter, user: user) }
+  let(:facebook) { create(:identity, :facebook, user: user) }
 
   subject { user }
 
@@ -16,24 +17,24 @@ RSpec.describe User, type: :model do
     expect(twitter.user.current_provider_avatar('twitter')).to be_a_kind_of(Addressable::URI)
   end
 
-  it "should update the user's Twitter avatar" do
-    expect(twitter.user.update_provider_avatar('twitter')).to be_an_instance_of(Twitter::User)
+  it "should establish a Twitter client" do
+    expect(twitter.user.send(:twitter_client)).to be_an_instance_of(Twitter::REST::Client)
   end
 
-  it "should establish a Twitter client" do
-    expect(twitter.user.send(:establish_twitter_client)).to be_an_instance_of(Twitter::REST::Client)
+  it "should establish a Facebook graph client" do
+    VCR.use_cassette 'user/facebook_graph' do
+      expect(facebook.user.send(:facebook_graph)).to be_an_instance_of(Koala::Facebook::API)
+    end
   end
 
   context "doesn't have token or secret saved" do
     before do
-      twitter_identity = create(:identity, user:user)
-      twitter_identity.token   = ""
-      twitter_identity.secret  = ""
-      twitter_identity.save
+      twitter.token   = ""
+      twitter.secret  = ""
+      twitter.save
     end
-
     it "should not establish a Twitter client" do
-      expect(user.send(:establish_twitter_client)).to eq(nil)
+      expect(twitter.user.send(:twitter_client)).to eq(nil)
     end
   end
 end

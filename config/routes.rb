@@ -13,11 +13,18 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   # :network identifies Twittter, Facebook, etc.
-  get '/explanation/:network', to: 'social#explanation', as: :explanation
+  get '/explanation/facebook/:step', to: 'facebook_actions#explanation', as: :facebook_explanation
+  get '/explanation/twitter', to: 'twitter_actions#explanation', as: :twitter_explanation
+
+  get '/twitter/avatar', to: 'twitter_actions#foobar', as: :twitter_avatar
 
   # Update Twitter profile images
-  match '/twitter/update', to: 'users#update_twitter', via: [:post], as: :update_twitter
+  match '/twitter/update', to: 'twitter_actions#update_twitter', via: [:post], as: :update_twitter
 
-  match ':network/all-done', to: 'social#all_done', via: :get, as: :social_done
+  # Upload the Bernietar to Facebook
+  match '/facebook/upload', to: 'facebook_actions#upload_facebook_bernietar', via: [:post], as: :upload_facebook
+
+  # Displayed after user has just change to Bernietar on a social network
+  match ':network/all-done', to: 'pages#all_done', via: :get, as: :social_done
 
 end

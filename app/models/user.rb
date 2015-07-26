@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
       # Twitter first. Might need a few conditions for the various networks
       identity.token  = auth.credentials.token if !auth.credentials.token.nil?
       identity.secret = auth.credentials.secret if !auth.credentials.secret.nil?
-
       identity.save!
     end
     user
@@ -69,34 +68,31 @@ class User < ActiveRecord::Base
   def current_provider_avatar(provider)
     case provider
       when 'twitter'
-        @twitter_client ||= establish_twitter_client
+        @twitter_client ||= twitter_client
         @twitter_client.user.profile_image_uri(size = :original)
+      when 'facebook'
+        @facebook_graph ||= facebook_graph
+        uid = @facebook_graph.get_object('me')['id']
+        @facebook_graph.get_picture(uid, type:'large')
     end
   end
 
-  # Update the avatar for the appropriate provider
-  def update_provider_avatar(provider)
-    case provider
-      when 'twitter'
-        encoded_image = Base64.encode64(File.open("#{::Rails.root}/app/assets/images/bernietar.png").read)
-        # Send the base 64 encoded bernietar to twitter
-        @twitter_client ||= establish_twitter_client
-        @twitter_client.update_profile_image encoded_image
-    end
+  def save_facebook_bernietar_id(id)
+    identity = facebook_identity
+    identity.bernietar_location = id
+    identity.save
   end
-
-  private
 
   # Create a client so we can tweet, update images, etc.
-  def establish_twitter_client
+  def twitter_client
     # Get the oauth info
-    user_token = identities.where(provider: 'twitter').pluck(:token).join(" ")
-    user_secret = identities.where(provider: 'twitter').pluck(:secret).join(" ")
+    user_token  = twitter_identity.token
+    user_secret = twitter_identity.secret
 
     # Setup the client (assuming we have the token and secret)
     unless user_token.blank? && user_secret.blank?
       # Establish a Twitter client connection
-      @twitter_client = Twitter::REST::Client.new do |config|
+      Twitter::REST::Client.new do |config|
         config.consumer_key = Rails.application.secrets.twitter_consumer_key
         config.consumer_secret = Rails.application.secrets.twitter_consumer_secret
         config.access_token = user_token
@@ -104,4 +100,21 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  # Create a facebook graph connection
+  def facebook_graph
+    user_token  = facebook_identity.token
+    # Setup the graph
+    Koala::Facebook::API.new(user_token) unless user_token.blank?
+  end
+
+  def facebook_identity
+    identities.find_by_provider 'facebook'
+  end
+
+  def twitter_identity
+    identities.find_by_provider 'twitter'
+  end
+
+
 end

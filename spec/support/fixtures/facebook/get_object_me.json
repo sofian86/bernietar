@@ -1,0 +1,13 @@
+{
+  "id":"123456787",
+  "email":"foobar@example.com",
+  "first_name":"Foo",
+  "gender":"male",
+  "last_name":"Bar",
+  "link":"https://www.facebook.com/app_scoped_user_id/123456787/",
+  "locale":"en_US",
+  "name":"Foo Bar",
+  "timezone":-6,
+  "updated_time":"2015-06-05T19:30:58+0000",
+  "verified":true
+}

@@ -26,9 +26,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if resource.email_verified?
       # super resource
       # redirect to /explanation/:provider
-      explanation_path(@network)
+      case @network
+      when 'twitter'
+        twitter_explanation_path
+      when 'facebook'
+        facebook_explanation_path 1
+      end
     else
-      # just Twitter for now
+      # just Twitter for now. Pretty sure you can't be on Facebook without an email
       finish_signup_path(resource)
     end
   end
