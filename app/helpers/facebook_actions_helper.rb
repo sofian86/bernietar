@@ -13,4 +13,8 @@ module FacebookActionsHelper
     end
   end
 
+  def facebook_logged_in?
+    true if current_user.identities.find_by_provider('facebook')
+  end
+
 end

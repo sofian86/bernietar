@@ -15,7 +15,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     }
   end
 
-  [:twitter, :facebook, :linked_in].each do |provider|
+  [:twitter, :facebook].each do |provider|
     provides_callback_for provider
   end
 
@@ -33,8 +33,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         facebook_explanation_path 1
       end
     else
-      # just Twitter for now. Pretty sure you can't be on Facebook without an email
-      finish_signup_path(resource)
+      finish_signup_path(resource, @network)
     end
   end
 end

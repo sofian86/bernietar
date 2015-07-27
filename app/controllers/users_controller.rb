@@ -32,11 +32,17 @@ class UsersController < ApplicationController
   # TODO - It's possible that we don't get a confirmed email from facebook. Need to handle that
   def finish_signup
     # authorize! :update, @user
+    @network = params[:network]
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
         # @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to twitter_explanation_path
+        case @network
+        when 'twitter'
+          redirect_to twitter_explanation_path
+        when 'facebook'
+          redirect_to facebook_explanation_path 1
+        end
       else
         @show_errors = true
       end

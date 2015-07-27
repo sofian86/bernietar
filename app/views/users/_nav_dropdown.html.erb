@@ -1,0 +1,13 @@
+<li class="dropdown">
+  <a id="user-drop" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    <%= current_user.name %>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="user-drop">
+    <li class="dropdown-heading">Bernietar Status</li>
+    <li><a href="#">Facebook</a></li>
+    <li><a href="#">Twitter</a></li>
+    <li role="separator" class="divider"></li>
+    <li><%= link_to 'Logout', destroy_user_session_path, method: :delete if user_signed_in? %></li>
+  </ul>
+</li>

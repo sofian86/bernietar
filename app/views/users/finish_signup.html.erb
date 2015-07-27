@@ -5,7 +5,7 @@
   </div>
   <div class="row">
   	<div class="col-sm-6 col-sm-offset-3 add-email-container">
-  	  <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
+  	  <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user, @network), :html => { role: 'form'}) do |f| %>
   		  <% if @show_errors && current_user.errors.any? %>
   			  <div id="error_explanation">
     				<% current_user.errors.full_messages.each do |msg| %>
