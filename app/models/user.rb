@@ -88,10 +88,12 @@ class User < ActiveRecord::Base
   def has_facebook_bernietar?
     graph = facebook_graph
     bernietar_location = facebook_identity.bernietar_location
-    # This returns a URI regardless. We have to check for a substring match
-    # using the ID we saved when first uploading
-    picture = graph.get_picture(bernietar_location)
-    true if picture.include?(bernietar_location)
+    if bernietar_location
+      # This returns a URI regardless. We have to check for a substring match
+      # using the ID we saved when first uploading
+      picture = graph.get_picture(bernietar_location)
+      true if picture.include?(bernietar_location)
+    end
   end
 
   # Create a client so we can tweet, update images, etc.

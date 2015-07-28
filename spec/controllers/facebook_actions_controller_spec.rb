@@ -7,10 +7,27 @@ RSpec.describe FacebookActionsController, type: :controller do
     before { sign_in facebook.user }
 
     describe "POST #upload_facebook_bernietar" do
-      it "should post to user's facebook account" do
-        VCR.use_cassette 'facebook/upload_facebook_bernietar' do
-          post :upload_facebook_bernietar
-          expect(response).to redirect_to facebook_explanation_path 2
+
+      context "without existing bernietar" do
+        it "should post to user's facebook account" do
+          VCR.use_cassette 'facebook/upload_facebook_bernietar' do
+            post :upload_facebook_bernietar
+            expect(response).to redirect_to facebook_explanation_path 2
+          end
+        end
+      end
+
+      context "with existing bernietar" do
+        before do
+          facebook.bernietar_location = '122035284805695'
+          facebook.save
+        end
+
+        it "should proceed to final cropping step" do
+          VCR.use_cassette 'facebook/existing_facebook_bernietar' do
+            post :upload_facebook_bernietar
+            expect(response).to redirect_to facebook_explanation_path 2
+          end
         end
       end
 

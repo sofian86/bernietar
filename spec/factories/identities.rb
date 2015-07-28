@@ -16,7 +16,9 @@ FactoryGirl.define do
     trait :facebook do
       after(:create) do |identity|
         identity.provider = 'facebook'
-        identity.token = 'CAAMBWjkFywEBAPZCTJcPiqXSbzX1flMrBfPjcdYp8Lk1whyOYORpdElBegXMUXXeUoNqcrUufqLZAEKC7700xkZBvFZA0AjueyZCRNZAv6BwTb9UUJ2he54S143XP9HDDLsX7mMQLs8w5DRLXsQpQFfrcAAYy4oiJIrluZCOtdL8xErrJk04qEphmTrvsD40YFgx8wleOXTFEZCHCRTZBZCUuRZATarGg0zV00ZD'
+        identity.token = 'CAAMBWjkFywEBAEXOZC4MfSbk0VYiXEVjWbaraziPPHQ0VxsPG1U1ZCeNiPbHYxGwfkdrZCwGZB2Qie7evDvagZBtLdviZBHE3vQRkKG4331eAKyzpu9yaYZAZBaS2AwuyZCJprl2aGZB0L2ZBcoeuJQJE3sncPk7dzWAqHdX2TwsqZAO3Tc5FoaFsG3gHmqSfRUtZBd36BZBoDZAlQxF602QrQ3bGCZA'
+        # Uncomment for a VCR pass
+        # identity.bernietar_location = '122035284805695'
         identity.save
       end
     end
