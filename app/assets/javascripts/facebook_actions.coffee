@@ -1,3 +1,10 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+ready = ->
+
+  # We won't be getting any response back from Facebook so we're being nice
+  # and assuming they've cropped and saved the Bernietar
+  $('#crop-facebook').click ->
+    $('#steps').addClass('hide')
+    $('#final').removeClass('hide')
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

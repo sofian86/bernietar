@@ -1,32 +1,37 @@
-<%= render partial: 'shared/explanation_header', locals: {network:'facebook'} %>
-
-<div class="band band-gray">
-  <div class="row">
-    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-      <div class="row row-margin-bottom">
-        <div class="col-sm-6">
-          <div class="well-outline well-outline-primary <%= active_step? 1 %>" id="fb-step-1">
-            <h3 class="text-primary">
-        		    <span class="light">Step 1</span> Upload Bernietar
-        	  </h3>
-            <p>With your permission, we'll upload a Bernietar to your Facebook account. Once that's done you can proceed to step 2 and confirm the change to your current avatar.</p>
-            <div class="text-center">
-              <%= link_to "Okay, let's begin!", upload_facebook_path, method: :post, class: 'btn btn-success btn-margin' %>
+<div id="steps">
+  <%= render partial: 'shared/explanation_header', locals: {network:'facebook'} %>
+  <div class="band band-gray">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <div class="row row-margin-bottom">
+          <div class="col-sm-6">
+            <div class="well-outline well-outline-primary <%= active_step? 1 %>" id="fb-step-1">
+              <h3 class="text-primary">
+          		    <span class="light">Step 1</span> Upload Bernietar
+          	  </h3>
+              <p>With your permission, we'll upload a Bernietar to your Facebook account. Once that's done you can proceed to step 2 and confirm the change to your current avatar.</p>
+              <div class="text-center">
+                <%= link_to "Okay, let's begin!", upload_facebook_path, method: :post, class: 'btn btn-success btn-margin' %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well-outline well-outline-primary <%= active_step? 2 %>" id="fb-step-2">
-            <h3 class="text-primary">
-        		    <span class="light">Step 2</span> Confirm change
-        	  </h3>
-            <p>Now that your Facebook account has a Bernietar, let's set it as your profile image so everyone can see it. We're going to send you to Facebook to finish things up.</p>
-            <div class="text-center">
-              <%= finalize_facebook_button %>
+          <div class="col-sm-6">
+            <div class="well-outline well-outline-primary <%= active_step? 2 %>" id="fb-step-2">
+              <h3 class="text-primary">
+          		    <span class="light">Step 2</span> Confirm change
+          	  </h3>
+              <p>Now that your Facebook account has a Bernietar, let's set it as your profile image so everyone can see it. We're going to send you to Facebook to finish things up.</p>
+              <div class="text-center">
+                <%= finalize_facebook_button %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div id="final" class="hide">
+  <%= render partial: 'pages/whats_next', locals: {network: 'facebook'} %>
 </div>
