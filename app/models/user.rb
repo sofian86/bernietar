@@ -68,19 +68,28 @@ class User < ActiveRecord::Base
   def current_provider_avatar(provider)
     case provider
       when 'twitter'
-        @twitter_client ||= twitter_client
-        @twitter_client.user.profile_image_uri(size = :original)
+        client = twitter_client
+        client.user.profile_image_uri(size = :original)
       when 'facebook'
-        @facebook_graph ||= facebook_graph
-        uid = @facebook_graph.get_object('me')['id']
-        @facebook_graph.get_picture(uid, type:'large')
+        graph = facebook_graph
+        uid = graph.get_object('me')['id']
+        graph.get_picture(uid, type:'large')
     end
   end
 
-  def save_facebook_bernietar_id(id)
+  def save_bernietar_id(id, provider)
     identity = facebook_identity
     identity.bernietar_location = id
     identity.save
+  end
+
+  def bernietar_set?(provider)
+    case provider
+    when 'twitter'
+      has_twitter_bernietar?
+    when 'facebook'
+      has_facebook_bernietar?
+    end
   end
 
   # Create a client so we can tweet, update images, etc.
@@ -116,5 +125,24 @@ class User < ActiveRecord::Base
     identities.find_by_provider 'twitter'
   end
 
+  private
+
+  # Check to see if there is a known bernietar already uploaded to the user's
+  # account
+  def has_facebook_bernietar?
+    graph = facebook_graph
+    bernietar_location = facebook_identity.bernietar_location
+    if bernietar_location
+      # This returns a URI regardless. We have to check for a substring match
+      # using the ID we saved when first uploading
+      picture = graph.get_picture(bernietar_location)
+      true if picture.include?(bernietar_location)
+    end
+  end
+
+  def has_twitter_bernietar?
+    client = twitter_client
+    client.user.profile_image_uri()
+  end
 
 end

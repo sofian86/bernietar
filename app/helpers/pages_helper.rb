@@ -27,7 +27,11 @@ module PagesHelper
   def start_or_update_button(provider)
     explanation_path = determine_explanation_path provider
     if user_signed_in? && !current_user.identities.where(provider: provider).blank?
-      link_to 'Update', explanation_path, class:'btn btn-margin btn-danger btn-wide', id:"#{provider}-update"
+      if current_user.bernietar_set?(provider)
+        link_to 'Complete', explanation_path, class:'btn btn-margin btn-danger btn-wide', disabled: 'disabled', id:"#{provider}-update"
+      else
+        link_to 'Update', explanation_path, class:'btn btn-margin btn-danger btn-wide', id:"#{provider}-update"
+      end
     else
       link_to 'Start', user_omniauth_authorize_path(provider_corrector(provider)), class:'btn btn-margin btn-danger btn-wide', id:"#{provider}-start"
     end
@@ -53,6 +57,5 @@ module PagesHelper
       facebook_explanation_path 1
     end
   end
-
 
 end

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
   before_action :authenticate_user!, only: [:update_twitter, :upload_facebook_bernietar]
-  before_action :set_twitter, only: [:update_twitter]
 
   # GET /users/:id.:format
   def show
@@ -29,7 +28,6 @@ class UsersController < ApplicationController
   end
 
   # If we don't have a confirmed email...
-  # TODO - It's possible that we don't get a confirmed email from facebook. Need to handle that
   def finish_signup
     # authorize! :update, @user
     @network = params[:network]
@@ -45,6 +43,8 @@ class UsersController < ApplicationController
         end
       else
         @show_errors = true
+        # Redirect to a page with a notice saying that email has already been
+        # registered.
       end
     end
   end
@@ -63,7 +63,8 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params

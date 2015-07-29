@@ -10,6 +10,7 @@ class FacebookActionsController < ApplicationController
   # Uploads the bernietar to facebook in its own album. Doesn't set the profile image because there is no API call
   # for that.
   def upload_facebook_bernietar
+    # No known Bernietar, so do the upload and proceed
     uploaded_bernietar = current_user.facebook_graph.put_picture("#{::Rails.root}/app/assets/images/bernietar.png")
     if current_user.save_facebook_bernietar_id uploaded_bernietar['id']
       flash[:success] = "Great. We've uploaded your Bernitar. On to step 2."

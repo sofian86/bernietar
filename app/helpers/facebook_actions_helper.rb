@@ -7,9 +7,17 @@ module FacebookActionsHelper
 
   def finalize_facebook_button
     if @step.to_i == 2
-      link_to 'Go to Facebook', @uploaded_bernietar_uri, target: '_blank', class:'btn btn-success btn-margin'
+      link_to 'Go to Facebook', @uploaded_bernietar_uri, target: '_blank', class:'btn btn-success btn-margin', id:'crop-facebook'
     else
       link_to 'Go to Facebook', '#', class:'btn btn-success btn-margin', disabled:'disabled'
+    end
+  end
+
+  def upload_facebook_button
+    if current_user.bernietar_set?('facebook')
+      link_to "Okay, let's begin!", '#', class: 'btn btn-success btn-margin', disabled: 'disabled'
+    else
+      link_to "Okay, let's begin!", upload_facebook_path, method: :post, class: 'btn btn-success btn-margin'
     end
   end
 
